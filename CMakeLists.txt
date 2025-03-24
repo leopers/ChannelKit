@@ -12,6 +12,6 @@ file(GLOB_RECURSE CHANNELKIT_SOURCES
 
 add_library(channel_kit ${CHANNELKIT_SOURCES})
 
-add_executable(lab1 ${CMAKE_SOURCE_DIR}/labs/lab1.cpp)
+add_executable(lab1 ${CMAKE_SOURCE_DIR}/labs/lab1/lab1.cpp)
 
 target_link_libraries(lab1 channel_kit)

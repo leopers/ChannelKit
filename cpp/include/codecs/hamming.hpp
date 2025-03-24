@@ -2,15 +2,15 @@
 #define HAMMING_HPP
 
 #include "../utils/matrix.hpp"
-#include <vector>
+#include "encoder.hpp"
 
 namespace codecs {
 
-class Hamming {
+class Hamming : public Encoder {
 public:
   Hamming();
-  utils::Array encode(const utils::Array &bits);
-  utils::Array decode(const utils::Array &bits);
+  utils::Array encode(const utils::Array &bits) const override;
+  utils::Array decode(const utils::Array &bits) const override;
 
 private:
   utils::Matrix G;

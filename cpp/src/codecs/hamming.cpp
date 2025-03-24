@@ -13,7 +13,7 @@ static const std::vector<std::vector<int>> Verificator = {
 
 Hamming::Hamming() : G(Generator), H(Verificator) {}
 
-utils::Array Hamming::encode(const utils::Array &bits) {
+utils::Array Hamming::encode(const utils::Array &bits) const {
   if (bits.size() != 4) {
     throw std::invalid_argument("Hamming::encode: bits.size() != 4");
   }
@@ -21,7 +21,7 @@ utils::Array Hamming::encode(const utils::Array &bits) {
   return bits * G;
 }
 
-utils::Array Hamming::decode(const utils::Array &bits) {
+utils::Array Hamming::decode(const utils::Array &bits) const {
   if (bits.size() != 7) {
     throw std::invalid_argument("Hamming::decode: bits.size() != 7");
   }
