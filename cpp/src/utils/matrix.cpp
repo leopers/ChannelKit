@@ -28,11 +28,11 @@ const int &Array::operator[](std::size_t i) const { return array[i]; }
 bool Array::operator==(const Array &rhs) const { return array == rhs.array; }
 
 Array Array::operator()(std::size_t i, std::size_t j) const {
-  if (i > j || j >= size()) {
+  if (i >= j || j > size()) {
     throw std::out_of_range("Array::operator(): invalid indices");
   }
-  std::vector<int> result(j - i + 1);
-  for (std::size_t k = i; k <= j; k++) {
+  std::vector<int> result(j - i);
+  for (std::size_t k = i; k < j; k++) {
     result[k - i] = array[k];
   }
   return Array(result);

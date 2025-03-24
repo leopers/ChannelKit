@@ -31,7 +31,7 @@ utils::Array Hamming::decode(const utils::Array &bits) {
 
   utils::Array zerosyndrome({0, 0, 0});
   if (syndrome == zerosyndrome) {
-    return bits(0, 3);
+    return bits(0, 4);
   }
 
   int error = -1;
@@ -43,12 +43,12 @@ utils::Array Hamming::decode(const utils::Array &bits) {
   }
 
   if (error == -1) {
-    return bits(0, 3);
+    return bits(0, 4);
   }
 
   utils::Array corrected = bits;
   corrected[error] = 1 - corrected[error];
-  return corrected(0, 3);
+  return corrected(0, 4);
 }
 
 } // namespace codecs
