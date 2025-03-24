@@ -9,8 +9,8 @@ namespace codecs {
 class Hamming {
 public:
   Hamming();
-  std::vector<int> encode(const std::vector<int> &bits);
-  std::vector<int> decode(const std::vector<int> &bits);
+  utils::Array encode(const utils::Array &bits);
+  utils::Array decode(const utils::Array &bits);
 
 private:
   utils::Matrix G;

@@ -3,6 +3,41 @@
 
 namespace utils {
 
+Array::Array(const std::vector<int> &d) : array(d) {}
+
+Array::Array(std::size_t size) : array(size, 0) {}
+
+std::size_t Array::size() const { return array.size(); }
+
+Array Array::operator+(const Array &rhs) const {
+  if (size() != rhs.size()) {
+    throw std::invalid_argument("Array::operator+: size() != rhs.size()");
+  }
+
+  std::vector<int> result(size());
+  for (std::size_t i = 0; i < size(); i++) {
+    result[i] = (array[i] + rhs.array[i]) % 2;
+  }
+  return Array(result);
+}
+
+int &Array::operator[](std::size_t i) { return array[i]; }
+
+const int &Array::operator[](std::size_t i) const { return array[i]; }
+
+bool Array::operator==(const Array &rhs) const { return array == rhs.array; }
+
+Array Array::operator()(std::size_t i, std::size_t j) const {
+  if (i > j || j >= size()) {
+    throw std::out_of_range("Array::operator(): invalid indices");
+  }
+  std::vector<int> result(j - i + 1);
+  for (std::size_t k = i; k <= j; k++) {
+    result[k - i] = array[k];
+  }
+  return Array(result);
+}
+
 Matrix::Matrix(const std::vector<std::vector<int>> &d) : matrix(d) {}
 
 std::size_t Matrix::rows() const { return matrix.size(); }
@@ -34,7 +69,7 @@ Matrix Matrix::operator*(const Matrix &rhs) const {
   return Matrix(result);
 }
 
-std::vector<int> operator*(const std::vector<int> &v, const Matrix &rhs) {
+Array operator*(const Array &v, const Matrix &rhs) {
   if (v.size() != rhs.rows()) {
     throw std::invalid_argument("operator*: v.size() != rhs.rows()");
   }
@@ -49,7 +84,7 @@ std::vector<int> operator*(const std::vector<int> &v, const Matrix &rhs) {
     }
     result[i] = sum % 2;
   }
-  return result;
+  return Array(result);
 }
 
 Matrix Matrix::transpose() const {
@@ -62,4 +97,13 @@ Matrix Matrix::transpose() const {
   return Matrix(result);
 }
 
+int &Matrix::operator()(std::size_t i, std::size_t j) {
+  if (i >= rows() || j >= cols()) {
+    throw std::out_of_range("Matrix::operator()(i,j) index out of range");
+  }
+
+  return matrix[i][j];
+}
+
+Array Matrix::operator()(std::size_t i) { return Array(matrix[i]); }
 } // namespace utils

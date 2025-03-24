@@ -5,8 +5,8 @@ namespace channel {
 
 BSC::BSC(double p) : p(p) {}
 
-std::vector<int> BSC::transmit(const std::vector<int> &bits) {
-  std::vector<int> received(bits.size());
+utils::Array BSC::transmit(const utils::Array &bits) {
+  utils::Array received(bits.size());
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_real_distribution<> dis(0.0, 1.0);

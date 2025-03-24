@@ -1,18 +1,18 @@
 #ifndef BSC_HPP
 #define BSC_HPP
 
+#include "../utils/matrix.hpp"
 #include <vector>
-
 namespace channel {
 
 class BSC {
 public:
   BSC(double p);
-  std::vector<int> transmit(const std::vector<int> &bits);
+  utils::Array transmit(const utils::Array &bits);
 
 private:
   double p;
 };
 } // namespace channel
 
-#endif
+#endif // BSC_HPP
