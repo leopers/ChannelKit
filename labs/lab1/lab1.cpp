@@ -7,7 +7,7 @@
 #include <iostream>
 
 int main() {
-  std::size_t size = 1000000;
+  std::size_t size = 999996;
   std::vector<double> probabilities = {0.5,    0.2,    0.1,     0.05,   0.02,
                                        0.01,   0.005,  0.002,   0.001,  0.0005,
                                        0.0002, 0.0001, 0.00005, 0.00002};
@@ -27,14 +27,20 @@ int main() {
 
     for (std::size_t i = 0; i < size; i += 4) {
       utils::Array hEncoded = hamming.encode(message(i, i + 4));
-      utils::Array cEncoded = custom.encode(message(i, i + 4));
       utils::Array hReceived = bsc.transmit(hEncoded);
-      utils::Array cReceived = bsc.transmit(cEncoded);
       utils::Array hDecodedPart = hamming.decode(hReceived);
-      utils::Array cDecodedPart = custom.decode(cReceived);
 
       for (std::size_t j = 0; j < 4; j++) {
         hDecoded[i + j] = hDecodedPart[j];
+      }
+    }
+
+    for (std::size_t i = 0; i < size; i += 6) {
+      utils::Array cEncoded = custom.encode(message(i, i + 6));
+      utils::Array cReceived = bsc.transmit(cEncoded);
+      utils::Array cDecodedPart = custom.decode(cReceived);
+
+      for (std::size_t j = 0; j < 6; j++) {
         cDecoded[i + j] = cDecodedPart[j];
       }
     }
@@ -46,8 +52,9 @@ int main() {
     file << std::fixed << std::setprecision(10) << p << "," << ber << ","
          << berHamming << "," << berCustom << std::endl;
 
-    std::cout << std::fixed << std::setprecision(10) << p << "," << ber << ","
-              << berHamming << "," << berCustom << std::endl;
+    std::cout << "Probability: " << std::fixed << std::setprecision(10) << p
+              << ", BER: " << ber << ", BER (Hamming): " << berHamming
+              << ", BER (Custom): " << berCustom << std::endl;
   }
 
   file.close();
