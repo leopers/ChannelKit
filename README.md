@@ -1,6 +1,6 @@
 # ChannelKit 
 
-**ChannelKit** is a high-performance telecommunications toolbox written in C++ with Python integration for testing, plotting, and simulation. It focuses on channel encoding, modulation, and noise modeling, offering tools for researchers, students, and engineers building modern communication systems.
+**ChannelKit** is a telecommunications toolbox written in C++ with Python integration for testing, plotting, and simulation. It focuses mainly on channel encoding and noise modeling.
 
 ---
 
@@ -8,13 +8,11 @@
 
 - Efficient C++ implementations of common coding schemes:
   - Convolutional Codes
+  - Block codes
 - Channel models:
-  - AWGN
-  - Fading *(planned)*
-- Python bindings via [pybind11](https://github.com/pybind/pybind11)
+  - BSC 
 - Python utilities for:
   - Bit Error Rate (BER) analysis
-- Unit testing with `pytest`
 
 ---
 
@@ -25,7 +23,6 @@
 - C++17 compiler (GCC/Clang/MSVC)
 - Python 3.8+
 - [CMake](https://cmake.org/) ≥ 3.15
-- [pybind11](https://github.com/pybind/pybind11)
 - Python packages (see `requirements.txt`)
 
 ### Build Instructions
