@@ -16,6 +16,8 @@ int main() {
   codecs::Custom custom;
 
   std::ofstream file("../data/lab1.csv", std::ios::app);
+  file.close();
+  file.open("../data/lab1.csv", std::ios::out | std::ios::trunc);
 
   for (double p : probabilities) {
     utils::Array message = utils::generateRandomMessage(size);
@@ -51,10 +53,6 @@ int main() {
 
     file << std::fixed << std::setprecision(10) << p << "," << ber << ","
          << berHamming << "," << berCustom << std::endl;
-
-    std::cout << "Probability: " << std::fixed << std::setprecision(10) << p
-              << ", BER: " << ber << ", BER (Hamming): " << berHamming
-              << ", BER (Custom): " << berCustom << std::endl;
   }
 
   file.close();
