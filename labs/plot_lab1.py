@@ -18,13 +18,13 @@ def main():
 
     # Create the plot
     plt.figure(figsize=(10, 6))
-    plt.loglog(df["Probability"], df["BER"], marker="o", label="BER")
-    plt.loglog(df["Probability"], df["BER_Hamming"], marker="s", label="BER (Hamming)")
-    plt.loglog(df["Probability"], df["BER_Custom"], marker="^", label="BER (Custom)")
+    plt.loglog(df["Probability"], df["BER"], marker="o", label="Não codificado")
+    plt.loglog(df["Probability"], df["BER_Hamming"], marker="s", label="Hamming")
+    plt.loglog(df["Probability"], df["BER_Custom"], marker="^", label="Custom")
 
-    plt.xlabel("Input Bit Error Probability (log scale)")
-    plt.ylabel("Bit Error Rate (BER) (log scale)")
-    plt.title("BER vs. Input Probability (Log-Log Scale)")
+    plt.xlabel("p (log scale)")
+    plt.ylabel("Probabilidade de Erro de Bit (log scale)")
+    plt.title("Pb vs. p (Log-Log Scale)")
     plt.grid(True, which="both", ls="--", linewidth=0.5)
     plt.legend()
 
